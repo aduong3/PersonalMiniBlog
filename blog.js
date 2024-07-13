@@ -130,7 +130,7 @@ ytButton.addEventListener('click',addURL);
 
 function addBlogPosts(e){
     e.preventDefault();
-
+    
     d = new Date();
     let textValue = blogText.value;
     if(imagePreview.src != window.location.href){
@@ -139,7 +139,12 @@ function addBlogPosts(e){
     let imageValue = currentimage;
     let ytValue = yt_link.value;
     if(!editingBool){
-    allBlogPosts.push({image: imageValue, text: textValue,yt_link: ytValue, date: d.toLocaleString('en-US', {
+
+        addPost.addEventListener('click', saveEdit);
+        if(imageValue == null || imageValue == undefined){
+            console.log("yep");
+        }
+        allBlogPosts.push({image: imageValue, text: textValue,yt_link: ytValue, date: d.toLocaleString('en-US', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -147,8 +152,10 @@ function addBlogPosts(e){
         minute: '2-digit'
     })
 });
-    }
-    console.log(allBlogPosts);
+} else{
+    saveEdit();
+}
+    editingBool = false;
     // console.log(allBlogPosts[0].image);
     blogSpot.innerHTML = '';
     editingBool = false;
@@ -347,7 +354,7 @@ function saveEdit(){
     //console.log("going through");
     // console.log(editingBool);
     if(editingBool){
-        console.log(d);
+
         const updatedText = blogText.value;
         const updatedImage = imagePreview.src;
         const updatedLink = yt_link.value;
@@ -362,22 +369,23 @@ function saveEdit(){
 
         document.querySelector(`.text_${currentIndex}`).innerText = `${currentIndex}. ${updatedText}`;
         document.querySelector(`.image_${currentIndex}`).src = updatedImage;
-        document.querySelector(`date_${currentIndex}`).innerText = `${editTime.getMonth()}/${editTime.getDate()}/${editTime.getFullYear()} - ${editTime.getHours().toString().padStart(2,'0')}:${editTime.getMinutes().toString().padStart(2,'0')}`;
+
+        document.querySelector(`.date_${currentIndex}`).innerText = editTime;
         const updatedYoutube = document.querySelector(`.youtube_${currentIndex}`);
         if(updatedLink){
             updatedYoutube.href = updatedLink;
         } else{
             updatedYoutube.removeAttribute('href');
         }
-    }
+    
 
         // removeBlogPosts(index); // doesn't work. I'm guessing it is because it is deleting and re-rendering the DOM.
         //allBlogPosts = allBlogPosts.filter((blogPost, i) => i !== index);
         clearLocalStorage();
         saveData();
-    
+    }
 }
-addPost.addEventListener('click', saveEdit);
+
 addPost.addEventListener('click', addBlogPosts);
 
 function saveData(){
@@ -390,8 +398,15 @@ function showData(){
     blogSpot.innerHTML = localStorage.getItem("data");
     let retString = localStorage.getItem("array");
     //console.log(retString);
-    allBlogPosts = JSON.parse(retString);
-
+    if(retString) {
+    
+    try{
+        allBlogPosts = JSON.parse(retString);
+    }
+    catch (err){
+        console.log("invalid read.");
+    }
+    }
     // removeBlogPosts();
     // editBlogPostsIndex();
 }
