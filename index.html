@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="blog.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Arimo:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Personal Mini Blog</title>
+</head>
+<body>
+
+
+<header>
+    <h1>Personal Blog</h1>
+    <!-- <i class="fa-solid fa-plus addIcon"></i> -->
+    <p id="addAPost">Add a post</p>
+</header>
+
+
+<main>
+    <section id="enterBlog">
+        <div class="blogHeader">
+            <h2>Create Your Post</h2>
+            <i class="fa-solid fa-xmark closeWindow"></i>
+        </div>
+        <br>
+        <hr>
+        <div id="form-container">
+        <form>
+            <textarea required name="blogText" id="blogText" placeholder="What do you want to share?" maxlength="400"></textarea>
+            <img id="imagePreview" src="">
+            <div class="additionalActions">
+                <input id="file-input" type="file" style="display: none;" name="file-input">
+                <label for="file-input">
+                    <i class="fa-solid fa-image"></i>
+                </label>
+                <input type="url" name="yt-link" id="yt-link">
+                <label for="yt-link">
+                    <i class="fa-brands fa-youtube yt-button"></i>
+                </label>
+            </div>
+            <button type="button" id="addPost">Add Post</button>
+        </form>
+        </div>
+    </section>
+
+    <section id="blogSpot"></section>
+</main>
+
+
+
+<script src="blog.js"></script>
+<footer>
+    <div class="footer-container">
+        <a href="https://github.com/aduong3?tab=repositories" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://www.linkedin.com/in/andrew-duong-6210a0206/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <p>Made by Andrew</p>
+    </div>
+</footer>
+</body>
+
+</html>
